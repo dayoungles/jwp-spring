@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import core.web.Result;
 @Controller
 @RequestMapping(value={"", "/questions"})
 public class QuestionController {
@@ -68,15 +68,17 @@ public class QuestionController {
 	}
 	
 	@RequestMapping("{id}/delete")
-	public String delete(@PathVariable("id") long questionId){
+	public @ResponseBody Result delete(@PathVariable("id") long questionId){
 		try {
 			qnaService.delete(questionId);
 		} catch (ExistedAnotherUserException e) {
 			e.printStackTrace();
-//			return e.getLocalizedMessage();
+			String msg = e.getLocalizedMessage();
+			logger.debug(msg);
+			return Result.fail(e.getMessage());
 		}
 		
-		return "redirect:/";
+		return Result.ok();
 	}
 	
 	

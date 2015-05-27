@@ -5,14 +5,14 @@
 	function registerEvents() {
 		var elWriteForm = document.querySelector('.answerWrite input[type=submit]');
 		var elComments = document.querySelector('#comments');
-//		var btnDelete = document.querySelector('#delete');
+		var btnDelete = document.querySelector('#delete');
 		
 		elWriteForm.addEventListener('click', writeAnswer, false);
 		elComments.addEventListener('click', deleteAnswer, false);
-//		btnDelete.addEventListener('click', deleteQuestion, false);
+		btnDelete.addEventListener('click', deleteQuestion, false);
 		
 	}
-	/*
+	
 	function deleteQuestion(e){
 		e.preventDefault();
 		var url= e.target.getAttribute("url");
@@ -23,13 +23,19 @@
 
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
-				
-				console.log(request.responseText);
-			}
+				var obj = JSON.parse(request.responseText);
+				console.log(obj);
+				if(obj.status ===true){
+					alert("삭제되었습니다. 그런데 제가 자바스크립트로 새로고침을 못하겠네요. 알아서 돌아가세요.");
+					 window.location.replace("localhost:8080");
+				}else {
+					alert(obj.errorMessage);
+				}
+			}					
 		}
 		request.send();
 	}
-	*/
+	
 	
 	function deleteAnswer(e) {
 		e.preventDefault();
