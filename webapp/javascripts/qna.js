@@ -49,6 +49,11 @@
 
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
+				var jsonObj = JSON.parse(request.responseText);
+				
+				if(jsonObj.errorMessage!=""){
+					alert("error! " + jsonObj.errorMessage);
+				}
 				location.reload(true)
 			}
 		}
