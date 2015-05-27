@@ -24,12 +24,12 @@
 
 	/>
 
+	<bean id="DBInitializer" class="next.dao.DBInitializer"
+		init-method="init"
+	/>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
 		p:dataSource-ref="dataSource"
 	/>	
-	<bean id="DBInitializer" class="next.dao.DBInitializer"
-		init-method="init"
-	/>
-	
+	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

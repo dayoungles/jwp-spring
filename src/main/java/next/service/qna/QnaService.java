@@ -11,9 +11,12 @@ import next.model.qna.Question;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Scope("prototype")
+@Transactional(propagation=Propagation.SUPPORTS)
 public class QnaService {
 	@Resource(name = "questionDao")
 	private QuestionDao questionDao;
@@ -46,13 +49,15 @@ public class QnaService {
 
 		questionDao.delete(questionId);
 	}
-
+	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void addAnswer(long questionId, Answer answer) {
 		answer.setQuestionId(questionId);
 		answerDao.insert(answer);
 		questionDao.increaseCommentCount(questionId);
 	}
-
+	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void deleteAnswer(long questionId, long answerId) {
 		answerDao.delete(answerId);
 		questionDao.decreaseCommentCount(questionId);
