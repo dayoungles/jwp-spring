@@ -15,9 +15,12 @@ import next.service.audit.AuditService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
+@Scope("prototype")
 public class UserService {
 	private static Logger log = LoggerFactory.getLogger(UserService.class);
 
@@ -27,6 +30,7 @@ public class UserService {
 	@Resource(name = "auditService")
 	private AuditService auditService;
 
+	
 	private User existedUser;
 
 	public void setUserDao(UserDao userDao) {
