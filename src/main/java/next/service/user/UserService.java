@@ -18,6 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Scope("prototype")
@@ -36,7 +39,8 @@ public class UserService {
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-
+	
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRES_NEW)
 	public User join(User user) throws ExistedUserException {
 		log.debug("User : {}", user);
 
@@ -71,7 +75,7 @@ public class UserService {
 	public User findByUserId(String userId) {
 		return userDao.findByUserId(userId);
 	}
-
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRES_NEW)
 	public void update(String userId, User updateUser) throws PasswordMismatchException {
 		existedUser = userDao.findByUserId(userId);
 		if (existedUser == null) {
