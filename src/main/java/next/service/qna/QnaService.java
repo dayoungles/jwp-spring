@@ -37,7 +37,13 @@ public class QnaService {
 	}
 
 	public void save(Question question) {
+		Question found = questionDao.findById(question.getQuestionId());
+		if(found!= null){//기존에 존재하던 녀석이면 update
+			questionDao.update(question);
+			return;
+		} 
 		questionDao.insert(question);
+		return;
 	}
 	
 	public void delete(final long questionId) throws ExistedAnotherUserException {

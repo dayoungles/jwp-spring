@@ -9,6 +9,7 @@ import next.model.qna.Question;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -62,7 +63,11 @@ public class QuestionDao extends AbstractJdbcDaoSupport {
 			
 		};
 		
-		return getJdbcTemplate().queryForObject(sql, rm, questionId);
+		try{
+			return getJdbcTemplate().queryForObject(sql, rm, questionId);
+		} catch(EmptyResultDataAccessException e){
+			return null;
+		}
 	}
 	
 	public void increaseCommentCount(long questionId) {
@@ -82,5 +87,10 @@ public class QuestionDao extends AbstractJdbcDaoSupport {
 	public void delete(long questionId) {
 		String sql = "DELETE FROM QUESTIONS WHERE questionId = ?";
 		getJdbcTemplate().update(sql, questionId);
+	}
+
+	public void update(Question question) {
+		String sql = "UPDATE QUESTIONS SET title=? , contents=? WHERE questionID=?";
+		getJdbcTemplate().update(sql, question.getTitle(), question.getContents(), question.getQuestionId());
 	}
 }

@@ -36,6 +36,7 @@
 				</tr>
 			</table></c:when>
 				<c:otherwise>
+					<form:hidden path="questionId" value="${question.questionId}"/>
 					<table>
 						<tr>
 							<td width="150">글쓴이</td>
