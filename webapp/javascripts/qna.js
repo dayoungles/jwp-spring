@@ -27,7 +27,7 @@
 				console.log(obj);
 				if(obj.status ===true){
 					alert("삭제되었습니다. 그런데 제가 자바스크립트로 새로고침을 못하겠네요. 알아서 돌아가세요.");
-					 window.location.replace("localhost:8080");
+					location.href = "/";
 				}else {
 					alert(obj.errorMessage);
 				}
