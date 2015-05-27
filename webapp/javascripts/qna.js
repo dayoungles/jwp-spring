@@ -5,11 +5,32 @@
 	function registerEvents() {
 		var elWriteForm = document.querySelector('.answerWrite input[type=submit]');
 		var elComments = document.querySelector('#comments');
-
+//		var btnDelete = document.querySelector('#delete');
+		
 		elWriteForm.addEventListener('click', writeAnswer, false);
 		elComments.addEventListener('click', deleteAnswer, false);
+//		btnDelete.addEventListener('click', deleteQuestion, false);
+		
 	}
+	/*
+	function deleteQuestion(e){
+		e.preventDefault();
+		var url= e.target.getAttribute("url");
+		console.log(url);
+		var request = new XMLHttpRequest();
+		request.open("DELETE", url, true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				
+				console.log(request.responseText);
+			}
+		}
+		request.send();
+	}
+	*/
+	
 	function deleteAnswer(e) {
 		e.preventDefault();
 		if (e.target.nodeName !== 'A') {

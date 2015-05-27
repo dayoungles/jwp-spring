@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import next.model.qna.Question;
+import next.service.qna.ExistedAnotherUserException;
 import next.service.qna.QnaService;
 
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value={"", "/questions"})
@@ -64,4 +66,29 @@ public class QuestionController {
 		qnaService.save(question);
 		return "redirect:/";
 	}
+	
+	@RequestMapping("{id}/delete")
+	public String delete(@PathVariable("id") long questionId){
+		try {
+			qnaService.delete(questionId);
+		} catch (ExistedAnotherUserException e) {
+			e.printStackTrace();
+//			return e.getLocalizedMessage();
+		}
+		
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

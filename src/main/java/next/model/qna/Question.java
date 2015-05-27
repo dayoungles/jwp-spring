@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Question {
 	private long questionId;
@@ -105,12 +107,18 @@ public class Question {
 			return true;
 		}
 		
-		List<Answer> anotherAnswers = answers.stream()
-				.filter(a -> a.isSameUser(writer))
-				.collect(Collectors.toList());
-		return anotherAnswers.isEmpty();
+		return isExistAnotherUser();
 	}
 
+	private boolean isExistAnotherUser(){
+		int len = answers.size();
+		for(int i = 0; i< len; i++){
+			if(!answers.get(i).getWriter().equals(this.writer)){
+				return false;
+			}
+		}
+		return true;
+	}
 	@Override
 	public String toString() {
 		return "Question [questionId=" + questionId + ", writer=" + writer + ", title=" + title + ", contents=" + contents + ", createdDate="

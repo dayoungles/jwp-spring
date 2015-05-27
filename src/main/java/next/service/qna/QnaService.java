@@ -43,7 +43,7 @@ public class QnaService {
 	public void delete(final long questionId) throws ExistedAnotherUserException {
 		question = findById(questionId);
 		
-		if (!question.canDelete()) {
+		if (!question.canDelete()) {//false면 
 			throw new ExistedAnotherUserException("다른 사용자가 추가한 댓글이 존재해 삭제할 수 없습니다.");
 		}
 
