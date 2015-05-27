@@ -38,6 +38,13 @@ public class QuestionController {
 		return "qna/show";
 	}
 	
+	@RequestMapping("/{id}/form")
+	public String modify(Model model, @PathVariable("id") long questionId){
+		Question question = qnaService.findById(questionId);
+		model.addAttribute("question", question);
+		return "qna/form";
+	}
+	
 	@RequestMapping("/form")
 	public String form(Model model) {
 		model.addAttribute("question", new Question());

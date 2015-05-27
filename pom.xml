@@ -15,6 +15,7 @@
 	</properties>
 
 	<dependencies>
+
 		<!-- unit testing -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -27,7 +28,7 @@
 			<artifactId>mockito-core</artifactId>
 			<version>1.9.5</version>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
 
 		<!-- servlet -->
 		<dependency>
@@ -51,7 +52,7 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
+
 		<!-- spring framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -68,12 +69,12 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.1.1.Final</version>
-		</dependency>		
+		</dependency>
 
 		<!-- logger -->
 		<dependency>
@@ -130,6 +131,12 @@
 			<artifactId>tomcat-jsp-api</artifactId>
 			<version>${tomcat.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5-pre10</version>
 		</dependency>
 	</dependencies>
 
